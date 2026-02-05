@@ -1,10 +1,31 @@
-# Default ignored files
-/shelf/
-/workspace.xml
-# Ignored default folder with query files
-/queries/
-# Datasource local storage ignored files
-/dataSources/
-/dataSources.local.xml
-# Editor-based HTTP Client requests
-/httpRequests/
+# ===== IDEs =====
+.idea/
+.vscode/
+*.iml
+
+# ===== Java =====
+*.class
+
+# ===== Maven =====
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# ===== Logs =====
+*.log
+
+# ===== Sistema Operacional =====
+.DS_Store
+Thumbs.db
+
+# ===== Relatórios de teste =====
+allure-results/
+allure-report/
+
+# ===== Coverage =====
+coverage/
