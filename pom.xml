@@ -1,6 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -8,16 +9,17 @@
     <artifactId>restAssured-api-petstore</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <!-- ===================== PROPERTIES ===================== -->
     <properties>
-        <!-- Java & Maven -->
+        <!-- Java -->
         <java.version>21</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- Dependency versions -->
-        <restassured.version>6.0.0</restassured.version>
-        <json-schema-validator.version>6.0.0</json-schema-validator.version>
+        <!-- Versions -->
+        <restassured.version>5.4.0</restassured.version>
+        <json-schema-validator.version>5.4.0</json-schema-validator.version>
         <junit.version>5.11.4</junit.version>
         <allure.version>2.29.1</allure.version>
         <jackson.version>2.18.2</jackson.version>
@@ -26,18 +28,20 @@
         <log4j.version>2.24.3</log4j.version>
         <owner.version>1.0.12</owner.version>
 
-        <!-- Plugin versions -->
+        <!-- Plugins -->
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <allure-maven.version>2.14.0</allure-maven.version>
-        <allure.commandline.version>2.27.0</allure.commandline.version>
+        <allure.commandline.version>2.29.1</allure.commandline.version>
 
-        <!-- Allure config -->
+        <!-- Allure -->
         <allure.results.directory>target/allure-results</allure.results.directory>
         <junit.jupiter.extensions.autodetection.enabled>true</junit.jupiter.extensions.autodetection.enabled>
     </properties>
 
+    <!-- ===================== DEPENDENCIES ===================== -->
     <dependencies>
+
         <!-- REST Assured -->
         <dependency>
             <groupId>io.rest-assured</groupId>
@@ -124,11 +128,14 @@
             <version>6.0.0</version>
             <scope>compile</scope>
         </dependency>
+
     </dependencies>
 
+    <!-- ===================== BUILD ===================== -->
     <build>
         <plugins>
-            <!-- Compiler Plugin -->
+
+            <!-- Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -140,21 +147,30 @@
                 </configuration>
             </plugin>
 
-            <!-- Surefire Plugin (JUnit 5 + Allure results) -->
+            <!-- Surefire (JUnit 5 + Allure) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
+
                 <configuration>
                     <includes>
                         <include>**/*Test.java</include>
                         <include>**/*Tests.java</include>
                     </includes>
+
                     <systemPropertyVariables>
-                        <allure.results.directory>${allure.results.directory}</allure.results.directory>
+                        <allure.results.directory>
+                            ${allure.results.directory}
+                        </allure.results.directory>
                     </systemPropertyVariables>
-                    <argLine>-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.22/aspectjweaver-1.9.22.jar"</argLine>
+
+                    <!-- Necessário para Allure -->
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.22/aspectjweaver-1.9.22.jar"
+                    </argLine>
                 </configuration>
+
                 <dependencies>
                     <dependency>
                         <groupId>org.aspectj</groupId>
@@ -164,16 +180,19 @@
                 </dependencies>
             </plugin>
 
-            <!-- Allure Maven Plugin -->
+            <!-- Allure Report -->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
                 <version>${allure-maven.version}</version>
+
                 <configuration>
                     <reportVersion>${allure.commandline.version}</reportVersion>
                     <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
+
 </project>
