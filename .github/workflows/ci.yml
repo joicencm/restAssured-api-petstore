@@ -1,0 +1,44 @@
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+    - if: '$CI_PIPELINE_SOURCE == "pipeline"'
+
+stages:
+  - test
+  - report
+
+variables:
+  MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+
+cache:
+  paths:
+    - .m2/repository
+
+run-tests:
+  stage: test
+  image: maven:3.9-eclipse-temurin-21
+  allow_failure: true
+  script:
+    - mvn test --batch-mode
+      -Dauth.password=$AUTH_PASSWORD
+      -Dauth.client.secret=$AUTH_CLIENT_SECRET
+  artifacts:
+    when: always
+    paths:
+      - target/allure-results/
+      - target/surefire-reports/
+    expire_in: 7 days
+
+generate-report:
+  stage: report
+  image: maven:3.9-eclipse-temurin-21
+  when: always
+  needs:
+    - run-tests
+  script:
+    - mvn allure:report --batch-mode
+  artifacts:
+    when: always
+    paths:
+      - target/site/allure-maven-plugin/
+    expire_in: 7 days
