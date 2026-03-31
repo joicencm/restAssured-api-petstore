@@ -6,7 +6,7 @@ import io.restassured.response.Response;
 
 public class UsersService extends BaseService {
 
-    public Response createUser(User user) {
+    public io.restassured.response.Response createUser(User user) {
         return request()
                 .body(user)
                 .post("/user");
