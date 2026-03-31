@@ -50,10 +50,16 @@ jobs:
           java-version: '21'
           cache: 'maven'
 
+      - name: Download test artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: test-results
+          path: target/allure-results
+
       - name: Generate Allure Report
         run: mvn allure:report --batch-mode
 
-      - name: Upload report
+      - name: Upload Allure Report
         if: always()
         uses: actions/upload-artifact@v4
         with:

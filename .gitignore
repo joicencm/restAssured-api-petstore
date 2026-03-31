@@ -24,6 +24,7 @@ buildNumber.properties
 Thumbs.db
 
 # ===== Relatórios de teste =====
+.allure/
 allure-results/
 allure-report/
 
