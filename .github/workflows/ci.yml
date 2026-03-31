@@ -47,7 +47,7 @@ jobs:
           name: test-results
           path: target/
 
-      - name: Generate Allure Report (Artifact)
+      - name: Generate Allure Report
         run: mvn allure:report --batch-mode
 
       - name: Upload Allure Report Artifact
@@ -58,6 +58,6 @@ jobs:
           path: target/site/allure-maven-plugin/
 
       - name: Preview Allure Report in Actions
-        uses: actions/allure-report-action@v1
+        uses: mikeal/allure-action@v2
         with:
           results: target/allure-results
