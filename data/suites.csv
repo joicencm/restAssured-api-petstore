@@ -1,4 +1,4 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Tue Mar 31 21:52:44 UTC 2026","Tue Mar 31 21:52:46 UTC 2026","2372","","tests.users.UsersTest","","tests.users.UsersTest","deveDeletarUsuario","deveDeletarUsuario()",""
-"passed","Tue Mar 31 21:52:47 UTC 2026","Tue Mar 31 21:52:47 UTC 2026","130","","tests.users.UsersTest","","tests.users.UsersTest","deveCriarEBuscarUsuario","deveCriarEBuscarUsuario()",""
-"passed","Tue Mar 31 21:52:46 UTC 2026","Tue Mar 31 21:52:47 UTC 2026","634","","tests.users.UsersTest","","tests.users.UsersTest","deveRetornarUserNotFound","deveRetornarUserNotFound()",""
+"passed","Wed Apr 01 00:04:32 UTC 2026","Wed Apr 01 00:04:34 UTC 2026","1334","","tests.users.UsersTest","","tests.users.UsersTest","deveDeletarUsuario","deveDeletarUsuario()",""
+"passed","Wed Apr 01 00:04:34 UTC 2026","Wed Apr 01 00:04:34 UTC 2026","432","","tests.users.UsersTest","","tests.users.UsersTest","deveRetornarUserNotFound","deveRetornarUserNotFound()",""
+"passed","Wed Apr 01 00:04:34 UTC 2026","Wed Apr 01 00:04:34 UTC 2026","125","","tests.users.UsersTest","","tests.users.UsersTest","deveCriarEBuscarUsuario","deveCriarEBuscarUsuario()",""
