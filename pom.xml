@@ -9,7 +9,6 @@
     <artifactId>restAssured-api-petstore</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!-- ===================== PROPERTIES ===================== -->
     <properties>
         <!-- Java -->
         <java.version>21</java.version>
@@ -17,44 +16,37 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <!-- Versions -->
+        <!-- Dependency versions -->
         <restassured.version>5.4.0</restassured.version>
         <json-schema-validator.version>5.4.0</json-schema-validator.version>
         <junit.version>5.11.4</junit.version>
-        <allure.version>2.24.0</allure.version>
+        <allure.version>2.22.0</allure.version>
         <jackson.version>2.18.2</jackson.version>
         <lombok.version>1.18.30</lombok.version>
         <slf4j.version>2.0.16</slf4j.version>
         <log4j.version>2.24.3</log4j.version>
         <owner.version>1.0.12</owner.version>
 
-        <!-- Plugins -->
+        <!-- Plugin versions -->
         <maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
         <allure-maven.version>2.14.0</allure-maven.version>
-        <allure.commandline.version>allure.version</allure.commandline.version>
 
         <!-- Allure -->
-        <allure.results.directory>target/allure-results</allure.results.directory>
-        <junit.jupiter.extensions.autodetection.enabled>true</junit.jupiter.extensions.autodetection.enabled>
+        <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
     </properties>
 
-    <!-- ===================== DEPENDENCIES ===================== -->
     <dependencies>
-
         <!-- REST Assured -->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>${restassured.version}</version>
-            <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>json-schema-validator</artifactId>
             <version>${json-schema-validator.version}</version>
-            <scope>test</scope>
         </dependency>
 
         <!-- JUnit 5 -->
@@ -68,14 +60,13 @@
         <!-- Allure -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-rest-assured</artifactId>
+            <artifactId>allure-junit5</artifactId>
             <version>${allure.version}</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>io.qameta.allure</groupId>
-            <artifactId>allure-junit5</artifactId>
+            <artifactId>allure-rest-assured</artifactId>
             <version>${allure.version}</version>
             <scope>test</scope>
         </dependency>
@@ -95,7 +86,7 @@
             <version>${jackson.version}</version>
         </dependency>
 
-        <!-- OWNER (config) -->
+        <!-- OWNER -->
         <dependency>
             <groupId>org.aeonbits.owner</groupId>
             <artifactId>owner</artifactId>
@@ -108,33 +99,20 @@
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j2-impl</artifactId>
             <version>${log4j.version}</version>
-            <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j.version}</version>
-            <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>rest-assured</artifactId>
-            <version>6.0.0</version>
-            <scope>compile</scope>
-        </dependency>
-
     </dependencies>
 
-    <!-- ===================== BUILD ===================== -->
     <build>
         <plugins>
-
             <!-- Compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -147,52 +125,32 @@
                 </configuration>
             </plugin>
 
-            <!-- Surefire (JUnit 5 + Allure) -->
+            <!-- Surefire -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${maven-surefire-plugin.version}</version>
-
                 <configuration>
                     <includes>
                         <include>**/*Test.java</include>
                         <include>**/*Tests.java</include>
                     </includes>
-
                     <systemPropertyVariables>
-                        <allure.results.directory>
-                            ${allure.results.directory}
-                        </allure.results.directory>
+                        <allure.results.directory>${allure.results.directory}</allure.results.directory>
                     </systemPropertyVariables>
-
-                    <!-- Necessário para Allure -->
-                    <argLine>
-                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.22/aspectjweaver-1.9.22.jar"
-                    </argLine>
                 </configuration>
-
-                <dependencies>
-                    <dependency>
-                        <groupId>org.aspectj</groupId>
-                        <artifactId>aspectjweaver</artifactId>
-                        <version>1.9.22</version>
-                    </dependency>
-                </dependencies>
             </plugin>
 
-            <!-- Allure Report -->
+            <!-- Allure -->
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
                 <version>${allure-maven.version}</version>
-
                 <configuration>
-                    <reportVersion>${allure.commandline.version}</reportVersion>
-                    <resultsDirectory>${project.build.directory}/allure-results</resultsDirectory>
+                    <reportVersion>${allure.version}</reportVersion>
+                    <resultsDirectory>${allure.results.directory}</resultsDirectory>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
-
 </project>
